@@ -14,17 +14,17 @@ all:
 .SECONDARY:
 
 data/iso3166.csv:
-	csvcut -c 10,9 source/UNSD-fr.csv > data/UNSD-fr-cut.csv
-	sed -i '' 's/Country or Area/official_name_fr/' data/UNSD-fr-cut.csv
-	csvcut -c 10,9 source/UNSD-ar.csv > data/UNSD-ar-cut.csv
-	sed -i '' 's/Country or Area/official_name_ar/' data/UNSD-ar-cut.csv
-	csvcut -c 10,9 source/UNSD-cn.csv > data/UNSD-cn-cut.csv
-	sed -i '' 's/Country or Area/official_name_cn/' data/UNSD-cn-cut.csv
-	csvcut -c 10,9 source/UNSD-es.csv > data/UNSD-es-cut.csv
-	sed -i '' 's/Country or Area/official_name_es/' data/UNSD-es-cut.csv
-	csvcut -c 10,9 source/UNSD-ru.csv > data/UNSD-ru-cut.csv
-	sed -i '' 's/Country or Area/official_name_ru/' data/UNSD-ru-cut.csv
-	csvjoin --blanks --left -c "M49 Code" source/UNSD-en.csv data/UNSD-fr-cut.csv data/UNSD-ar-cut.csv data/UNSD-cn-cut.csv data/UNSD-es-cut.csv data/UNSD-ru-cut.csv > data/iso3166.csv
+	csvcut -c 10,9 source/UNSD-ar.csv > source/UNSD-ar-cut.csv
+	sed -i '' 's/Country or Area/official_name_ar/' source/UNSD-ar-cut.csv
+	csvcut -c 10,9 source/UNSD-cn.csv > source/UNSD-cn-cut.csv
+	sed -i '' 's/Country or Area/official_name_cn/' source/UNSD-cn-cut.csv
+	csvcut -c 10,9 source/UNSD-es.csv > source/UNSD-es-cut.csv
+	sed -i '' 's/Country or Area/official_name_es/' source/UNSD-es-cut.csv
+	csvcut -c 10,9 source/UNSD-fr.csv > source/UNSD-fr-cut.csv
+	sed -i '' 's/Country or Area/official_name_fr/' source/UNSD-fr-cut.csv
+	csvcut -c 10,9 source/UNSD-ru.csv > source/UNSD-ru-cut.csv
+	sed -i '' 's/Country or Area/official_name_ru/' source/UNSD-ru-cut.csv
+	csvjoin --blanks --left -c "M49 Code" source/UNSD-en.csv source/UNSD-fr-cut.csv source/UNSD-ar-cut.csv source/UNSD-cn-cut.csv source/UNSD-es-cut.csv source/UNSD-ru-cut.csv > source/iso3166.csv
 	sed -i '' 's/M49 Code/M49/' data/iso3166.csv
 	sed -i '' 's/Country or Area/official_name_en/' data/iso3166.csv
 	sed -i '' 's/ISO-alpha3 Code/ISO3166-1-Alpha-3/' data/iso3166.csv

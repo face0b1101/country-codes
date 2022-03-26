@@ -1,3 +1,5 @@
+# Country-Codes
+
 [![goodtables.io](https://goodtables.io/badge/github/datasets/country-codes.svg)](https://goodtables.io/github/datasets/country-codes)
 
 Comprehensive country code information, including ISO 3166 codes, ITU dialing
@@ -5,7 +7,7 @@ codes, ISO 4217 currency codes, and many others. Provided as a [Tabular Data Pac
 
 ## Data
 
-Data are fetched from multiple sources:
+Data is fetched from multiple sources:
 
 Official formal and short names (in English, French, Spanish, Arabic, Chinese, and Russian) are from
 [United Nations Protocol and Liaison Service](https://protocol.un.org/dgacm/pls/site.nsf/PermanentMissions.xsp)
@@ -33,7 +35,6 @@ Capital cities, languages, continents, TLDs, and geonameid are from [geonames.or
 
 EDGAR codes are from [sec.gov](https://www.sec.gov/edgar/searchedgar/edgarstatecodes.htm)
 
-
 ## Preparation
 
 This package includes Python scripts to fetch current country information
@@ -41,18 +42,48 @@ from various data sources and output CSV of combined country code information.
 
 CSV output is provided via the `in2csv` and `csvcut` utilities from [csvkit](http://github.com/onyxfish/csvkit)
 
-NOTE/TODO: currently, preparation requires manual process to download and rename 6 CSV files from https://unstats.un.org/unsd/methodology/m49/overview/
+Currently, preparation requires manual process to download and rename 6 CSV files from https://unstats.un.org/unsd/methodology/m49/overview/
+
+*TODO: automate the downloads*
+
+Download and place in the `{project_root}/source` directory:
+
+* `source/UNSD-en.csv`
+* `source/UNSD-fr.csv`
+* `source/UNSD-ar.csv`
+* `source/UNSD-cn.csv`
+* `source/UNSD-es.csv`
+* `source/UNSD-ru.csv`
+
+### Docker
+
+Use docker to create a container that does all the messy work for you.
+Navigate to the root of this project, then run the following:
+
+```bash
+docker build -t country_codes ./scripts;
+docker run --rm \
+--name country_codes \
+-v $PWD:/country_codes \
+-w /country_codes \
+country_codes \
+make country-codes.csv
+```
 
 ### data/country-codes.csv
 
+Or, do it the old fashioned way...
 Install requirements:
 
-    pip install -r scripts/requirements.pip
-
+```bash
+pip install -r scripts/requirements.pip
+```
 
 Run GNU Make to generate data file:
 
-    make country-codes.csv
+```bash
+make country-codes.csv
+```
 
 ## License
 
@@ -74,4 +105,3 @@ use and reuse.
 
 If you intended to use these data in a public or commercial product, please
 check the original sources for any specific restrictions.
-

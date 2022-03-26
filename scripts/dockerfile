@@ -1,0 +1,6 @@
+# use official python image
+FROM python:2
+
+COPY ./requirements.pip /country_codes/scripts/requirements.pip
+
+RUN pip install -r /country_codes/scripts/requirements.pip
